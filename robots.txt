@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://swipesmm.github.io/stint-academy/sitemap.xml
+Sitemap: https://stintacademy.ru/sitemap.xml
