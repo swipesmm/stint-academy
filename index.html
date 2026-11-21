@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STINT ACADEMY: программа подготовки пилотов LMGT3 в Le Mans Ultimate</title>
+  <meta name="description" content="Прикладная программа подготовки пилотов класса GT3 (LMGT3) в симуляторе Le Mans Ultimate. Физика, контроль веса, анализ телеметрии в Motec i2 Pro и 10 практических сессий на сервере.">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114470592', 'ym');
+
+    ym(114470592, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114470592" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+  <!-- Прелоадер Liquid Glass Logo Reveal -->
+  <div id="preloader" class="preloader" aria-hidden="true"></div>
+
+  <!-- Чистая верхняя шапка -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="STINT ACADEMY">
+        <img src="assets/img/logo.png" alt="STINT ACADEMY" class="brand-logo">
+        <span class="brand-text">STINT <span>ACADEMY</span></span>
+      </a>
+
+      <nav class="nav-desktop">
+        <a href="#system">Наш подход</a>
+        <a href="#included">Что входит</a>
+        <a href="#program">Программа</a>
+        <a href="#leaderboard">Лидерборд</a>
+        <a href="#mentor">О тренере</a>
+        <a href="#apply">Цены</a>
+        <a href="partners.html">Партнерам</a>
+        <a href="https://t.me/stintacademy" target="_blank" rel="noopener">ТГ-канал</a>
+      </nav>
+
+      <div class="header-right">
+        <a href="#apply" class="btn btn-primary btn-sm header-cta-desktop">
+          <span>Забронировать</span>
+          <span class="btn-circle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M7 17L17 7M17 7H8M17 7V16"/>
+            </svg>
+          </span>
+        </a>
+        <button type="button" class="menu-btn" id="menuToggle" aria-expanded="false" aria-label="Открыть меню">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 8h16M4 16h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Мобильное боковое меню Liquid Glass -->
+  <div id="glassBackdrop" class="gn-backdrop" aria-hidden="true"></div>
+  <nav id="glassSidebar" class="gn-sidebar" aria-label="Навигация STINT ACADEMY">
+    <div class="gn-head">
+      <div class="gn-head-logo">
+        <img src="assets/img/logo.png" alt="">
+      </div>
+      <div class="gn-head-copy">
+        <strong>STINT ACADEMY</strong>
+        <small>По классу LMGT3 в LMU</small>
+      </div>
+      <button type="button" id="menuClose" class="gn-close" aria-label="Закрыть меню">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="gn-body">
+      <div class="gn-group">
+        <p class="gn-group-title">Программа</p>
+        <ul class="gn-list">
+          <li>
+            <a class="gn-link" href="#system">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+              <span>Наш подход</span>
+            </a>
+          </li>
+          <li>
+            <a class="gn-link" href="#included">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg>
+              <span>Что входит</span>
+            </a>
+          </li>
+          <li>
+            <a class="gn-link" href="#program">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+              <span>Программа</span>
+            </a>
+          </li>
+          <li>
+            <a class="gn-link" href="#leaderboard">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20V10M12 20V4M18 20v-7"/></svg>
+              <span>Лидерборд потока</span>
+            </a>
+          </li>
+          <li>
+            <a class="gn-link" href="#mentor">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 14.5-4 16 0"/></svg>
+              <span>О тренере</span>
+            </a>
+          </li>
+          <li>
+            <a class="gn-link is-active" href="#apply">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+              <span>Цены и запись</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="gn-group">
+        <p class="gn-group-title">Проект</p>
+        <ul class="gn-list">
+          <li>
+            <a class="gn-link" href="partners.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM4 20c1-3 5-5 8-5s7 2 8 5"/></svg>
+              <span>Партнерам</span>
+            </a>
+          </li>
+          <li>
+            <a class="gn-link" href="https://t.me/stintacademy" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <span>ТГ-канал</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TODO: заменить href на ссылку рабочего аккаунта менеджера, когда появится -->
+    <a class="gn-account" href="https://t.me/stintacademy" target="_blank" rel="noopener">
+      <span class="gn-avatar">TG</span>
+      <span class="gn-account-copy">
+        <strong>Менеджер STINT</strong>
+        <small>Оформить бронь в Телеграм</small>
+      </span>
+    </a>
+  </nav>
+
+  <main id="top">
+    <!-- Первый экран -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1 class="h-display h1 hero-reveal">
+              Программа подготовки<br>
+              <span class="text-accent">в LMGT3</span>
+            </h1>
+
+            <p class="lead hero-lead hero-reveal hero-reveal-d1">
+              Хватит угадывать точки торможения. Едь быстро на понимании физики и данных.
+            </p>
+          </div>
+
+          <div class="hero-visual" id="heroVisual">
+            <div class="hero-stage" id="heroStage">
+              <img src="assets/img/Ferrari.webp" alt="Ferrari 296 GT3 STINT ACADEMY" class="hero-car is-active">
+              <img src="assets/img/BMW.webp" alt="" class="hero-car is-standby" aria-hidden="true">
+            </div>
+          </div>
+
+          <div class="hero-actions hero-reveal hero-reveal-d2">
+            <a href="#apply" class="btn btn-primary">
+              <span>Забронировать место</span>
+              <span class="btn-circle">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                  <path d="M7 17L17 7M17 7H8M17 7V16"/>
+                </svg>
+              </span>
+            </a>
+            <a href="https://t.me/logachevandrew" target="_blank" rel="noopener" class="btn btn-ghost">
+              Оформить бронь в Телеграм
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Наш подход -->
+    <section id="system" class="section">
+      <div class="container">
+        <h2 class="h-display h2">Наш подход</h2>
+
+        <div class="bento-asym">
+          <article class="card-clean is-wide">
+            <div>
+              <h3 class="h-display h3">Качество подхода и <span class="text-accent">вечная база</span> видеоматериалов</h3>
+              <p class="card-desc">
+                Мы знаем, как обычно строятся групповые разборы: собрали пилотов на сервер, быстро пролистали презентацию и сразу поехали кататься без реальной проверки результата. В STINT ACADEMY все устроено иначе: тебя ждут заранее подготовленные технические видеоматериалы, к которым можно возвращаться в любой момент навсегда, и обязательная проверка навыков на каждом этапе.
+              </p>
+            </div>
+          </article>
+
+          <article class="card-clean">
+            <div>
+              <h3 class="h-display h3"><span class="text-accent">Физика</span> вместо слепого наката</h3>
+              <p class="card-desc">
+                Накатывать сотни кругов бесполезно, если ты просто заучиваешь ошибки. Мы объясняем, как загружать морду машины на торможении, беречь шины от перегрева в ABS и открывать газ в одно движение без провала в TC.
+              </p>
+            </div>
+          </article>
+
+          <article class="card-clean">
+            <div>
+              <h3 class="h-display h3">Твоя телеметрия в <span class="text-accent">Motec i2 Pro</span></h3>
+              <p class="card-desc">
+                После каждого модуля ты сдаешь свои логи и повторы, а мы накладываем их прямо поверх эталонных кругов Артема Маниши. Никаких общих советов: ты сразу видишь по графикам, где передержал тормоз или потерял скорость на разгоне.
+              </p>
+            </div>
+          </article>
+
+          <article class="card-clean">
+            <div>
+              <h3 class="h-display h3">Практика на <span class="text-accent">закрытом сервере</span></h3>
+              <p class="card-desc">
+                Вместо хаоса открытых лобби тебя ждут 10 сессий с наставником на приватном сервере и готовые сетапы под все 10 машин LMGT3. В плотном пелотоне мы отрабатываем сложные связки, дождевой пилотаж, обгоны в трафике и работу на пит-лейн.
+              </p>
+            </div>
+          </article>
+
+          <article class="card-clean">
+            <div>
+              <h3 class="h-display h3">Рейтинг потока и <span class="text-accent">личный коучинг</span></h3>
+              <p class="card-desc">
+                За каждый практический заезд ты получаешь олимпийские баллы и поднимаешься в общей таблице лидеров. В финале всех ждет 40-минутный зачетный стинт с пит-стопом, а тройка лучших пилотов заберет персональные тренировки 1-на-1 с Артемом.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- База скорости (Ютуб лид-магнит) -->
+    <section id="video" class="section">
+      <div class="container">
+        <h2 class="h-display h2">База скорости GT3 без воды</h2>
+        <p class="lead video-lead">
+          Посмотрите вводный разбор физики LMU перед участием в программе. Три ключевые ошибки, из-за которых пилоты теряют секунду с круга.
+        </p>
+
+        <div class="video-grid">
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/7Ya5uGfUtzM?rel=0"
+              title="Le Mans Ultimate - V1.4.2 Update"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <ul class="video-points">
+            <li>
+              <strong>01. Геометрия и зоны срезок</strong>
+              Как радиус траектории влияет на выход и как работают скрытые зоны Cut Detection на трассах LMU.
+            </li>
+            <li>
+              <strong>02. Trail Braking и физика ABS</strong>
+              Контроль переднего сплиттера, трехслойный нагрев шин (Carcass и Surface) и защита тормозов от перегрева.
+            </li>
+            <li>
+              <strong>03. Газ в одно движение</strong>
+              Почему качание педали ломает баланс, душит мотор через TC и крадет до 0.5 секунды на прямой.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Общий раздел: Что входит в программу -->
+    <section id="included" class="section">
+      <div class="container">
+        <span class="kicker">Состав доступа</span>
+        <h2 class="h-display h2">Что входит в программу</h2>
+        <p class="lead" style="margin-top: 14px;">
+          Полный комплект инструментов для системного роста темпа в Le Mans Ultimate: от вечной базы видеоматериалов и банка сетапов до живых сессий на сервере и финального стинта.
+        </p>
+
+        <!-- 3 главные карточки -->
+        <div class="included-cards">
+          <article class="inc-box">
+            <span class="inc-tag">Доступ навсегда</span>
+            <h3 class="h-display h3">Видео<span class="pc-break">-<br></span>материалы по теории</h3>
+            <p class="card-desc">
+              12 заранее записанных технических брифингов без воды. Материалы сохраняются у тебя навсегда: можно в любой момент вернуться к разбору шин, торможения, дождя или настроек шасси перед важным стартом.
+            </p>
+          </article>
+
+          <article class="inc-box">
+            <span class="inc-tag">10 сессий по 60-90 мин</span>
+            <h3 class="h-display h3">Живые практики на сервере</h3>
+            <p class="card-desc">
+              Отработка теории на приватном сервере проекта вместе с наставником: старты пелотона, прогрев шин без грелок, очная борьба в классе LMGT3, пропуск прототипов и быстрая работа на пит-лейн.
+            </p>
+          </article>
+
+          <article class="inc-box">
+            <span class="inc-tag">Итоговая гонка</span>
+            <h3 class="h-display h3">Финальный 40-минутный стинт</h3>
+            <p class="card-desc">
+              Официальный зачетный заезд на выделенном сервере с обязательным пит-стопом. Оцениваем стабильность темпа в коридоре 0.3-0.5 секунды, сохранность резины и чистоту борьбы в трафике.
+            </p>
+          </article>
+        </div>
+
+        <!-- Отдельная карточка про практические заезды и форматы проверки -->
+        <div class="hw-card">
+          <span class="inc-tag">Проверка каждого этапа</span>
+          <h3 class="h-display h3" style="margin-top: 10px;">Практические заезды и разбор материалов</h3>
+          <p class="lead" style="font-size: 14px; margin-top: 10px;">
+            После каждого технического блока ты закрепляешь навык на практике и сдаешь материалы на проверку Артему Манише и кураторам:
+          </p>
+
+          <ul class="hw-items">
+            <li><strong>Логи Motec i2 Pro:</strong> наложение твоих графиков торможения, газа и руля прямо поверх эталонных кругов.</li>
+            <li><strong>Видеоповторы кругов:</strong> разбор траекторий, работы с поребриками и ошибок на входе в повороты.</li>
+            <li><strong>Скриншоты онлайн-заездов:</strong> фиксация чистоты борьбы в трафике, позиций и коэффициента сплита.</li>
+            <li><strong>Стинты на экономию:</strong> проверка удержания темпа, расхода топлива и лимита износа резины на дистанции.</li>
+          </ul>
+        </div>
+
+        <!-- Банк сетапов от GO Setups и HYMO -->
+        <div class="garage-wrap">
+          <h3 class="h-display h3" style="margin-bottom: 10px;">
+            Банк сетапов от <span class="text-accent">GO Setups</span> и <span class="text-accent">HYMO</span>
+          </h3>
+          <p class="lead" style="margin: 0 auto 18px; font-size: 14px;">
+            Актуальные квалификационные и гоночные настройки от <span class="text-accent" style="font-weight: 600;">GO Setups</span> и <span class="text-accent" style="font-weight: 600;">HYMO</span> на все 10 автомобилей класса LMGT3 и все трассы LMU, плюс авторский шаблон Motec i2 Pro и эталонные логи кругов.
+          </p>
+
+          <div class="garage-stage">
+            <img id="garageImg" src="assets/img/BMW.webp" alt="BMW M4 GT3 STINT ACADEMY" class="garage-car-img" loading="lazy">
+            <div id="garageTitle" class="garage-car-title">BMW M4 GT3</div>
+            <div id="garageCounter" class="garage-counter">01 / 10</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Программа подготовки (4 блока без привязки к трассам) -->
+    <section id="program" class="section">
+      <div class="container">
+        <span class="kicker">Структура программы</span>
+        <h2 class="h-display h2">4 блока подготовки пилота</h2>
+
+        <div class="program-list">
+          <article class="prog-item is-open">
+            <button type="button" class="prog-trigger">
+              <div>
+                <span class="prog-num">БЛОК 01 / 5 МОДУЛЕЙ</span>
+                <div class="prog-title">Базовые технические настройки и физика LMGT3</div>
+              </div>
+              <span class="prog-icon">+</span>
+            </button>
+            <div class="prog-body">
+              <ul class="module-list">
+                <li><strong>Модуль 1.1:</strong> Конфигурация устройств ввода (Force Feedback, калибровка педали тормоза под ABS, сопряжение с Motec i2 Pro).</li>
+                <li><strong>Модуль 1.2:</strong> Геометрия траекторий, использование всей ширины асфальта и минимизация understeer.</li>
+                <li><strong>Модуль 1.3:</strong> Термодинамика и модель шин LMGT3: рабочие диапазоны давлений и температур, защита от деградации.</li>
+                <li><strong>Модуль 1.4:</strong> Техника торможения с ABS и Trail Braking с контролем загрузки передней оси.</li>
+                <li><strong>Модуль 1.5:</strong> Менеджмент резины и экономия топлива на длинных дистанциях без потери темпа.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prog-item">
+            <button type="button" class="prog-trigger">
+              <div>
+                <span class="prog-num">БЛОК 02 / 2 МОДУЛЯ</span>
+                <div class="prog-title">Телеметрия и продвинутые техники управления</div>
+              </div>
+              <span class="prog-icon">+</span>
+            </button>
+            <div class="prog-body">
+              <ul class="module-list">
+                <li><strong>Модуль 2.1:</strong> Тонкая настройка и разбор всех 3 параметров системы TC для чистого разгона без провалов.</li>
+                <li><strong>Модуль 2.2:</strong> Пилотаж в скоростных связках поворотов с учетом аэродинамической загрузки кузова.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prog-item">
+            <button type="button" class="prog-trigger">
+              <div>
+                <span class="prog-num">БЛОК 03 / 2 МОДУЛЯ</span>
+                <div class="prog-title">Индиви<span class="mob-break">-<br></span>дуальный баланс шасси и дождь</div>
+              </div>
+              <span class="prog-icon">+</span>
+            </button>
+            <div class="prog-body">
+              <ul class="module-list">
+                <li><strong>Модуль 3.1:</strong> Инженерный разбор влияния жесткости подвески, стабилизаторов и дифференциала на баланс машины под стиль пилота.</li>
+                <li><strong>Модуль 3.2:</strong> Дождевой баланс (ABS, TC, баланс тормозов), поиск мокрой траектории и контроль износа дождевых шин.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="prog-item">
+            <button type="button" class="prog-trigger">
+              <div>
+                <span class="prog-num">БЛОК 04 / 3 МОДУЛЯ + ФИНАЛЬНЫЙ СТИНТ</span>
+                <div class="prog-title">Гоночная тактика, трафик и контрольный заезд</div>
+              </div>
+              <span class="prog-icon">+</span>
+            </button>
+            <div class="prog-body">
+              <ul class="module-list">
+                <li><strong>Модуль 4.1:</strong> Стратегия взаимодействия в мультиклассовом трафике и предсказуемый пропуск старших классов.</li>
+                <li><strong>Модуль 4.2:</strong> Очная борьба в классе LMGT3, контроль слепых зон и тактическое перекрытие траекторий.</li>
+                <li><strong>Модуль 4.3:</strong> Регламент обслуживания на пит-лейн, расчет топлива на стинт и стратегии пит-стопов.</li>
+                <li><strong>Финальный зачетный стинт:</strong> 40-минутная контрольная гонка на выделенном сервере с обязательным пит-стопом и разбором стабильности темпа.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Отдельный раздел: Баллы и таблица лидеров -->
+    <section id="leaderboard" class="section">
+      <div class="container">
+        <span class="kicker">Олимпийский зачет</span>
+        <h2 class="h-display h2">Баллы и лидерборд потока</h2>
+
+        <div class="lb-layout">
+          <div class="lb-info">
+            <h3 class="h-display h3" style="margin-bottom: 12px;">Как начисляются баллы</h3>
+            <p class="lead" style="font-size: 14px; margin-bottom: 14px;">
+              За каждый проверенный практический заезд и сдачу материалов ты получаешь баллы по олимпийской шкале и поднимаешься в общей таблице потока.
+            </p>
+            <p class="lead" style="font-size: 14px;">
+              По итогам всех этапов и финального 40-минутного стинта тройка лучших пилотов таблицы забирает личные закрытые сессии 1-на-1 с Артемом Манишей.
+            </p>
+
+            <div class="rating-strip">
+              <div class="medal-card">
+                <div class="medal-pts">15</div>
+                <div class="medal-name">Золото</div>
+              </div>
+              <div class="medal-card">
+                <div class="medal-pts">10</div>
+                <div class="medal-name">Серебро</div>
+              </div>
+              <div class="medal-card">
+                <div class="medal-pts">5</div>
+                <div class="medal-name">Бронза</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lb-card">
+            <div class="lb-head">
+              <span>Место / Пилот</span>
+              <span>Очки</span>
+            </div>
+
+            <div id="leaderboardList" class="lb-list"></div>
+
+            <button type="button" id="leaderboardToggle" class="btn btn-ghost" style="width: 100%;">
+              Показать всех участников (10)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- О тренере -->
+    <section id="mentor" class="section">
+      <div class="container">
+        <div class="mentor-grid">
+          <div>
+            <span class="kicker">О тренере</span>
+            <h2 class="h-display h2">Артем Маниша</h2>
+            <div class="mentor-role">Ведущий наставник STINT ACADEMY</div>
+            <p class="lead" style="margin-bottom: 14px;">
+              Один из самых быстрых пилотов СНГ в Le Mans Ultimate, многократный победитель и призер международных виртуальных марафонов WEC и Кубка «СМП Рейсинг Еспортс». Первый обладатель Driver Rating P3 в LMU.
+            </p>
+            <p class="lead">
+              За плечами у Артема опыт работы с реальными гоночными инженерами и сотни часов персональных тренировок с симрейсерами. Он не заставляет заучивать трассу наизусть, а учит чувствовать баланс машины, читать телеметрию в Motec i2 Pro и снимать секунды с круга осознанно.
+            </p>
+          </div>
+
+          <div class="mentor-visual">
+            <img src="assets/img/driver%201.webp" alt="Пилот STINT ACADEMY" class="mentor-photo" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+   <!-- Цены и запись -->
+    <section id="apply" class="section pricing-section">
+      <div class="pricing-glow" aria-hidden="true"></div>
+
+      <div class="container pricing-container">
+        <div class="pricing-head">
+          <span class="kicker">Цены и участие</span>
+          <h2 class="h-display h2 pricing-title">Цены и условия</h2>
+          <p class="pricing-subtitle">
+            Выберите базовую программу, расширенную поддержку сетапами на 4 месяца или персональную работу с Артемом Манишей.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Тариф 1: Базовый -->
+          <article class="plan-card" data-plan="base">
+            <div class="plan-head">
+              <div class="plan-top">
+                <h3 class="plan-name">Базовый</h3>
+              </div>
+              <p class="plan-desc">
+                Полная прикладная программа подготовки в LMGT3 с проверкой практических заездов.
+              </p>
+              <div class="plan-price-row">
+                <span class="plan-price" data-price-value>16 670</span>
+                <span class="plan-currency">₽</span>
+                <span class="plan-period">/ поток</span>
+              </div>
+            </div>
+
+            <div class="plan-body">
+              <button type="button" class="plan-cta plan-cta-dark" data-select-plan="base">
+                Выбрать Базовый
+              </button>
+
+              <ul class="plan-highlights">
+                <li>12 предзаписанных видеоматериалов с доступом навсегда</li>
+                <li>10 групповых практических сессий на сервере (60-90 мин)</li>
+                <li>Финальный 40-минутный зачетный стинт</li>
+              </ul>
+
+              <div class="plan-includes">
+                <h4>Входит в участие:</h4>
+                <ul>
+                  <li>Авторский шаблон Motec i2 Pro и эталонные логи эксперта</li>
+                  <li>Банк сетапов GO Setups и HYMO на 10 машин и все трассы LMU</li>
+                  <li>Проверка практических заездов и олимпийский рейтинг</li>
+                  <li>Доступ к закрытому серверу STINT ACADEMY</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Тариф 2: Сетапы + -->
+          <article class="plan-card is-selected" data-plan="setups">
+            <div class="plan-head">
+              <div class="plan-top">
+                <h3 class="plan-name">Сетапы +</h3>
+                <span class="plan-badge">Популярный</span>
+              </div>
+              <p class="plan-desc">
+                Вся программа подготовки плюс актуальные обновления сетапов под свежие патчи LMU на 4 месяца.
+              </p>
+              <div class="plan-price-row">
+                <span class="plan-price" data-price-value>22 220</span>
+                <span class="plan-currency">₽</span>
+                <span class="plan-period">/ поток + 4 мес</span>
+              </div>
+            </div>
+
+            <div class="plan-body">
+              <button type="button" class="plan-cta plan-cta-dark" data-select-plan="setups">
+                Выбрать Сетапы +
+              </button>
+
+              <ul class="plan-highlights">
+                <li>4 месяца свежих сетапов под новые патчи LMU</li>
+                <li>Обновления GO Setups и HYMO сразу после выхода</li>
+                <li>Квалификационные и гоночные версии на все трассы</li>
+              </ul>
+
+              <div class="plan-includes">
+                <h4>Все из тарифа Базовый, плюс:</h4>
+                <ul>
+                  <li>Доступ к закрытому каналу обновлений на 4 месяца</li>
+                  <li>Дождевые и эндуранс-конфигурации под 10 машин LMGT3</li>
+                  <li>Адаптация баланса под изменения физики шин</li>
+                  <li>Экономия на зарубежных подписках без лишних карт</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Тариф 3: Личный инженер -->
+          <article class="plan-card" data-plan="engineer">
+            <div class="plan-head">
+              <div class="plan-top">
+                <h3 class="plan-name">Личный инженер</h3>
+              </div>
+              <p class="plan-desc">
+                Максимальный результат: вся база, сетапы на 4 месяца и 3 личные сессии с Артемом Манишей.
+              </p>
+              <div class="plan-price-row">
+                <span class="plan-price" data-price-value>38 890</span>
+                <span class="plan-currency">₽</span>
+                <span class="plan-period">/ максимум</span>
+              </div>
+            </div>
+
+            <div class="plan-body">
+              <button type="button" class="plan-cta plan-cta-dark" data-select-plan="engineer">
+                Выбрать Личный инженер
+              </button>
+
+              <ul class="plan-highlights">
+                <li>3 индивидуальные сессии 1-на-1 с Артемом Манишей</li>
+                <li>Глубокий разбор вашей телеметрии в Motec i2 Pro</li>
+                <li>Персональная донастройка сетапа под ваш стиль</li>
+              </ul>
+
+              <div class="plan-includes">
+                <h4>Все из тарифа Сетапы +, плюс:</h4>
+                <ul>
+                  <li>Приоритетная проверка заездов и обратная связь</li>
+                  <li>Точечный разбор торможения, Trail Braking и работы с TC</li>
+                  <li>Индивидуальный план подготовки к марафонам WEC</li>
+                  <li>Гибкое согласование времени личных созвонов</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Форма бронирования под карточками -->
+        <div class="booking-panel" id="bookingPanel">
+          <div class="booking-summary">
+            <span class="booking-summary-label">Выбранный тариф</span>
+            <div class="booking-summary-main">
+              <strong id="selectedPlanName">Сетапы +</strong>
+              <span class="booking-summary-price">
+                <span id="priceCurrent">22 220</span> ₽
+              </span>
+            </div>
+            <div id="priceOld" class="price-old" style="display: none; margin-bottom: 8px;">22 220 ₽</div>
+            <div id="promoBadge" class="promo-badge"></div>
+            <p class="booking-summary-note" id="selectedPlanNote">
+              Введите партнерский промокод справа, чтобы зафиксировать скидку 10% на выбранный тариф.
+            </p>
+          </div>
+
+          <div class="form-box" style="box-shadow: none; padding: 0; border: 0; background: transparent;">
+            <form id="leadForm" novalidate>
+              <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+              <input type="hidden" name="plan" id="planInput" value="Сетапы +">
+              <input type="hidden" name="price" id="priceInput" value="22220">
+
+              <div class="field">
+                <label for="nameInput">Имя</label>
+                <input id="nameInput" name="name" type="text" class="input" placeholder="Например, Алексей" required>
+              </div>
+
+              <div class="field">
+                <label for="tgInput">Ник в Телеграм</label>
+                <input id="tgInput" name="telegram" type="text" class="input" placeholder="@username" required>
+              </div>
+
+              <div class="field">
+                <label for="promoInput">Промокод партнера (скидка 10% на любой тариф)</label>
+                <div class="promo-group">
+                  <input id="promoInput" name="promo" type="text" class="input" placeholder="Необязательно">
+                  <button type="button" id="promoApplyBtn" class="promo-btn">Применить</button>
+                </div>
+              </div>
+
+              <label class="consent-row">
+                <input type="checkbox" name="consent" required>
+                <span>
+                  Даю согласие на обработку персональных данных по 152-ФЗ (<a href="privacy.html">политика и согласие</a>) и ознакомлен с <a href="offer.html">договором оферты</a>.
+                </span>
+              </label>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <span>Забронировать место</span>
+                <span class="btn-circle">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                    <path d="M7 17L17 7M17 7H8M17 7V16"/>
+                  </svg>
+                </span>
+              </button>
+
+              <div id="formStatus" class="form-status" role="status"></div>
+
+              <div class="form-divider">или напишите напрямую</div>
+
+              <a href="https://t.me/stintacademy" target="_blank" rel="noopener" class="btn btn-ghost" style="width: 100%;">
+                Оформить бронь в Телеграм
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 12px;">
+          <img src="assets/img/logo.png" alt="STINT ACADEMY" class="brand-logo">
+          <span class="brand-text">STINT <span>ACADEMY</span></span>
+        </div>
+        <p style="margin: 0;">
+          Информационно-консультационный проект по классу GT3 (LMGT3) в Le Mans Ultimate. Оказание услуг осуществляется плательщиком НПД (самозанятым) Сардаряном А. Я.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <strong style="color: var(--text-main);">Навигация</strong>
+        <a href="#system">Наш подход</a>
+        <a href="#included">Что входит</a>
+        <a href="#program">Программа</a>
+        <a href="#leaderboard">Лидерборд</a>
+        <a href="#apply">Цены</a>
+        <a href="partners.html">Партнерам</a>
+      </div>
+
+      <div class="footer-links">
+        <strong style="color: var(--text-main);">Контакты и документы</strong>
+        <a href="https://t.me/stintacademy" target="_blank" rel="noopener">ТГ-канал @stintacademy</a>
+        <!-- TODO: заменить href и текст на рабочий аккаунт менеджера -->
+        <a href="https://t.me/stintacademy" target="_blank" rel="noopener">Менеджер STINT ACADEMY</a>
+        <a href="offer.html">Публичная оферта и условия возврата</a>
+        <a href="privacy.html">Политика и согласие ПДн (152-ФЗ)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Баннер cookie -->
+  <div id="cookieBar" class="cookie-bar" role="dialog" aria-label="Уведомление о cookie">
+    <span>Мы используем файлы cookie и Яндекс.Метрику для стабильной работы сайта и учета промокодов. Подробнее в <a href="privacy.html">Политике ПДн</a>.</span>
+    <button type="button" id="cookieAccept" class="cookie-accept">Принять</button>
+  </div>
+
+  <script src="js/preloader.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
