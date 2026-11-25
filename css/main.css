@@ -59,11 +59,22 @@ button, input { font-family: inherit; }
   word-spacing: 0.22em;
   line-height: 1.78;
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .h1 { font-size: clamp(16px, 2.8vw, 28px); line-height: 1.78; }
 .h2 { font-size: clamp(14px, 2.4vw, 22px); line-height: 1.8; }
 .h3 { font-size: clamp(12px, 1.6vw, 14px); line-height: 1.8; }
+
+.h1.hero-title-partners {
+  font-size: clamp(11px, 1.9vw, 22px);
+  line-height: 1.78;
+  letter-spacing: 0.02em;
+  word-spacing: 0.16em;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
 
 p, li { text-wrap: pretty; }
 
@@ -396,8 +407,19 @@ p, li { text-wrap: pretty; }
   align-items: center;
 }
 
+.hero-copy {
+  position: relative;
+  z-index: 5;
+}
+
 .hero-lead { margin: 16px 0 0; }
-.hero-actions { display: flex; flex-direction: column; gap: 12px; }
+.hero-actions {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .hero-reveal {
   opacity: 0;
@@ -423,10 +445,11 @@ body.is-hero-ready .hero-reveal {
 
 .hero-visual {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 12px;
+  padding: 12px 0;
   overflow: hidden;
 }
 
@@ -455,7 +478,7 @@ body.is-hero-ready .hero-reveal {
   display: grid;
   grid-template-columns: 1fr;
   place-items: center;
-  transform: scale(1.12);
+  transform: none;
 }
 
 .hero-car {
@@ -929,6 +952,15 @@ body.is-hero-ready .hero-reveal {
 
 .lb-name { color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lb-pts { font-family: var(--font-display); font-size: 11px; color: var(--accent); white-space: nowrap; }
+.lb-empty {
+  padding: 24px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-canvas);
+  border: 1px dashed var(--border-strong);
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+}
 
 /* О тренере */
 .mentor-grid {
@@ -1093,6 +1125,8 @@ body.is-hero-ready .hero-reveal {
 .form-status { margin-top: 12px; padding: 12px 14px; border-radius: var(--radius-sm); font-size: 13px; display: none; }
 .form-status.is-ok { display: block; background: rgba(29, 148, 238, 0.1); border: 1px solid var(--accent); color: var(--text-main); }
 .form-status.is-err { display: block; background: rgba(220, 53, 69, 0.08); border: 1px solid #dc3545; color: #a61e2a; }
+.form-status-text { margin: 0 0 10px; line-height: 1.5; }
+.form-status-cta { width: 100%; padding: 10px 18px; }
 
 /* Страница для партнеров и стримеров (partners.html) */
 .partner-stats {
@@ -1225,6 +1259,21 @@ body.is-hero-ready .hero-reveal {
   .cookie-bar { flex-direction: column; align-items: stretch; }
 }
 
+/* Очень узкие экраны (360px) */
+@media (max-width: 390px) {
+  .container { padding: 0 14px; }
+  .h-display { letter-spacing: 0.01em; word-spacing: 0.14em; }
+  .h1 { font-size: 13.5px; line-height: 1.8; }
+  .h1.hero-title-partners { font-size: clamp(10.5px, 3vw, 13px); line-height: 1.78; letter-spacing: 0.01em; }
+  .h2 { font-size: 12px; line-height: 1.8; }
+  .h3 { font-size: 10.5px; line-height: 1.75; }
+  .prog-title { font-size: 10.5px; line-height: 1.75; }
+  .btn { font-size: 12.5px; padding: 13px 16px; white-space: normal; }
+  .btn-primary { padding: 13px 50px 13px 16px; }
+  #apply .plan-price { font-size: 32px; }
+  #apply .plan-name { font-size: 22px; }
+}
+
 /* Планшеты (768px+) */
 @media (min-width: 768px) {
   .container { padding: 0 28px; }
@@ -1263,32 +1312,46 @@ body.is-hero-ready .hero-reveal {
   .menu-btn, .gn-sidebar, .gn-backdrop { display: none !important; }
   .hero { padding: 44px 0 80px; }
   .hero-grid {
-    grid-template-columns: 0.92fr 1.28fr;
+    grid-template-columns: 0.96fr 1.04fr;
     grid-template-rows: auto auto;
-    column-gap: 18px;
+    column-gap: 32px;
     row-gap: 0;
+  }
+  .hero-grid--partners {
+    grid-template-columns: 1.12fr 0.88fr;
+    grid-template-rows: auto;
+  }
+  .hero-grid--partners > div:first-child {
+    position: relative;
+    z-index: 5;
   }
   .hero-copy {
     grid-column: 1;
     grid-row: 1;
     align-self: end;
+    position: relative;
+    z-index: 5;
   }
   .hero-actions {
     grid-column: 1;
     grid-row: 2;
     align-self: start;
     margin-top: 28px;
+    position: relative;
+    z-index: 5;
   }
   .hero-visual {
     grid-column: 2;
     grid-row: 1 / span 2;
-    margin-right: -42px;
+    margin-right: 0;
     padding: 0;
-    overflow: visible;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
   }
   .hero-stage {
-    width: 112%;
-    max-width: none;
+    width: 100%;
+    max-width: 100%;
     transform: none;
   }
   .garage-car-img { max-height: 380px; }

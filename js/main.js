@@ -60,7 +60,7 @@
       garageImg.classList.add('is-switching');
       setTimeout(() => {
         garageImg.src = 'assets/img/' + car.file;
-        garageImg.alt = car.name + ' в ливрее STINT ACADEMY';
+        garageImg.alt = car.name + ' LMGT3 в Le Mans Ultimate, STINT ACADEMY';
         garageTitle.textContent = car.name;
         if (garageCounter) {
           garageCounter.textContent = String(carIndex + 1).padStart(2, '0') + ' / ' + FLEET.length;
@@ -92,7 +92,7 @@
 
         nextImg.className = 'hero-car is-standby';
         nextImg.src = 'assets/img/' + nextCar.file;
-        nextImg.alt = nextCar.name + ' STINT ACADEMY';
+        nextImg.alt = nextCar.name + ' LMGT3 в Le Mans Ultimate, STINT ACADEMY';
 
         try {
           if (nextImg.decode) await nextImg.decode();
@@ -280,6 +280,28 @@
   }
 
   // 6. Валидация 152-ФЗ, защита от спама и отправка заявки
+  const TG_DIRECT_URL = 'https://t.me/stintacademy?direct';
+
+  function renderStatusWithTg(statusNode, message, isOk) {
+    if (!statusNode) return;
+    statusNode.className = 'form-status ' + (isOk ? 'is-ok' : 'is-err');
+    statusNode.textContent = '';
+
+    const textEl = document.createElement('p');
+    textEl.className = 'form-status-text';
+    textEl.textContent = message;
+
+    const btnEl = document.createElement('a');
+    btnEl.className = 'btn btn-ghost btn-sm form-status-cta';
+    btnEl.href = TG_DIRECT_URL;
+    btnEl.target = '_blank';
+    btnEl.rel = 'noopener noreferrer';
+    btnEl.textContent = 'Написать нам в Телеграм';
+
+    statusNode.appendChild(textEl);
+    statusNode.appendChild(btnEl);
+  }
+
   const form = document.getElementById('leadForm');
   const statusEl = document.getElementById('formStatus');
   let lastSubmitAt = 0;
@@ -354,43 +376,99 @@
         if (!resp.ok || data.error) {
           throw new Error(data.error || 'Bad status');
         }
-        statusEl.textContent = 'Заявка отправлена. Менеджер @logachevandrew свяжется с вами в Телеграм.';
-        statusEl.classList.add('is-ok');
+        renderStatusWithTg(
+          statusEl,
+          'Заявка отправлена. Мы свяжемся с вами в Телеграм, или вы можете написать нам первым:',
+          true
+        );
         if (typeof ym === 'function' && METRIKA_ID) {
           ym(METRIKA_ID, 'reachGoal', 'lead_sent');
         }
         form.reset();
         resetPromoUI();
       } catch (err) {
-        statusEl.textContent = 'Ошибка отправки. Напишите напрямую @logachevandrew в Телеграм.';
-        statusEl.classList.add('is-err');
+        renderStatusWithTg(
+          statusEl,
+          'Ошибка отправки. Напишите нам напрямую в Телеграм:',
+          false
+        );
       }
     });
   }
 
-  // 7. Лидерборд участников (свернут до 3 мест / развернут на 10)
+  // 7. Лидерборд участников (динамическая загрузка с Yandex Cloud, свернут до топ-3)
   const lbList = document.getElementById('leaderboardList');
   const lbToggle = document.getElementById('leaderboardToggle');
 
   if (lbList && lbToggle) {
-    const mockScores = [135, 125, 115, 100, 95, 85, 80, 70, 60, 50];
-    mockScores.forEach((pts, idx) => {
-      const place = idx + 1;
-      const row = document.createElement('div');
-      row.className = 'lb-row' + (place <= 3 ? ' is-top rank-' + place : ' is-extra');
-      row.innerHTML =
-        '<span class="lb-rank">' + String(place).padStart(2, '0') + '</span>' +
-        '<span class="lb-name">Иванов Иван Иванович</span>' +
-        '<span class="lb-pts">' + pts + ' PTS</span>';
-      lbList.appendChild(row);
-    });
+    function renderLeaderboardEmpty() {
+      lbList.innerHTML = '';
+      const empty = document.createElement('div');
+      empty.className = 'lb-empty';
+      empty.textContent = 'Таблица обновится после старта потока';
+      lbList.appendChild(empty);
+      lbToggle.style.display = 'none';
+    }
+
+    function renderLeaderboardItems(items) {
+      if (!Array.isArray(items) || items.length === 0) {
+        renderLeaderboardEmpty();
+        return;
+      }
+
+      lbList.innerHTML = '';
+      lbList.classList.remove('is-expanded');
+
+      items.forEach((item, idx) => {
+        const place = idx + 1;
+        const row = document.createElement('div');
+        row.className = 'lb-row' + (place <= 3 ? ' is-top rank-' + place : ' is-extra');
+
+        const rankEl = document.createElement('span');
+        rankEl.className = 'lb-rank';
+        rankEl.textContent = String(place);
+
+        const nameEl = document.createElement('span');
+        nameEl.className = 'lb-name';
+        nameEl.textContent = String(item.name || '');
+
+        const ptsEl = document.createElement('span');
+        ptsEl.className = 'lb-pts';
+        ptsEl.textContent = String(Number(item.points) || 0);
+
+        row.appendChild(rankEl);
+        row.appendChild(nameEl);
+        row.appendChild(ptsEl);
+        lbList.appendChild(row);
+      });
+
+      if (items.length <= 3) {
+        lbToggle.style.display = 'none';
+      } else {
+        lbToggle.style.display = '';
+        lbToggle.textContent = 'Показать весь список';
+      }
+    }
 
     lbToggle.addEventListener('click', () => {
       const expanded = lbList.classList.toggle('is-expanded');
-      lbToggle.textContent = expanded
-        ? 'Свернуть до топ-3'
-        : 'Показать всех участников (' + mockScores.length + ')';
+      lbToggle.textContent = expanded ? 'Свернуть до топ-3' : 'Показать весь список';
     });
+
+    (async () => {
+      if (!FORM_ENDPOINT) {
+        renderLeaderboardEmpty();
+        return;
+      }
+      try {
+        const resp = await fetch(`${FORM_ENDPOINT}?action=leaderboard`);
+        if (!resp.ok) throw new Error('Bad status');
+        const data = await resp.json();
+        renderLeaderboardItems(data && data.items ? data.items : []);
+      } catch (e) {
+        renderLeaderboardEmpty();
+      }
+    })();
   }
 
   // 8. Баннер cookie
@@ -485,15 +563,21 @@
         if (!resp.ok || data.error) {
           throw new Error(data.error || 'Bad status');
         }
-        partnerStatus.textContent = 'Заявка отправлена. Менеджер @logachevandrew свяжется с вами в Телеграм.';
-        partnerStatus.classList.add('is-ok');
+        renderStatusWithTg(
+          partnerStatus,
+          'Заявка отправлена. Мы свяжемся с вами в Телеграм, или вы можете написать нам первым:',
+          true
+        );
         if (typeof ym === 'function' && METRIKA_ID) {
           ym(METRIKA_ID, 'reachGoal', 'partner_sent');
         }
         partnerForm.reset();
       } catch (err) {
-        partnerStatus.textContent = 'Ошибка отправки. Напишите напрямую @logachevandrew в Телеграм.';
-        partnerStatus.classList.add('is-err');
+        renderStatusWithTg(
+          partnerStatus,
+          'Ошибка отправки. Напишите нам напрямую в Телеграм:',
+          false
+        );
       }
     });
   }
