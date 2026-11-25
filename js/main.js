@@ -599,4 +599,67 @@
   if (!document.getElementById('preloader')) {
     requestAnimationFrame(() => document.body.classList.add('is-hero-ready'));
   }
+
+  // 11. Карусель фотографий эксперта (свайп, стрелки, точки)
+  const mentorCarousel = document.getElementById('mentorCarousel');
+  if (mentorCarousel) {
+    const track = mentorCarousel.querySelector('.mentor-carousel-track');
+    const slides = mentorCarousel.querySelectorAll('.mentor-slide');
+    const dots = mentorCarousel.querySelectorAll('.mentor-dot');
+    const prevBtn = mentorCarousel.querySelector('.mentor-nav-btn.is-prev');
+    const nextBtn = mentorCarousel.querySelector('.mentor-nav-btn.is-next');
+    const viewport = mentorCarousel.querySelector('.mentor-carousel-viewport');
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    function goToSlide(index) {
+      if (!track || totalSlides === 0) return;
+      currentSlide = ((index % totalSlides) + totalSlides) % totalSlides;
+      track.style.transform = `translate3d(-${currentSlide * 100}%, 0, 0)`;
+
+      dots.forEach((dot, idx) => {
+        const active = idx === currentSlide;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', String(active));
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const target = parseInt(dot.dataset.slide || '0', 10);
+        if (!Number.isNaN(target)) goToSlide(target);
+      });
+    });
+
+    if (viewport) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchActive = false;
+
+      viewport.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchActive = true;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        if (!touchActive || e.changedTouches.length === 0) return;
+        touchActive = false;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy)) {
+          goToSlide(dx < 0 ? currentSlide + 1 : currentSlide - 1);
+        }
+      }, { passive: true });
+    }
+  }
 })();

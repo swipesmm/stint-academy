@@ -508,15 +508,55 @@
             <h2 class="h-display h2">Артем Маниша</h2>
             <div class="mentor-role">Ведущий наставник STINT ACADEMY</div>
             <p class="lead" style="margin-bottom: 14px;">
-              Один из самых быстрых пилотов СНГ в Le Mans Ultimate, многократный победитель и призер международных виртуальных марафонов WEC и Кубка «СМП Рейсинг Еспортс». Первый обладатель Driver Rating P3 в LMU.
+              Один из самых быстрых пилотов СНГ в Le Mans Ultimate, первый обладатель Driver Rating P3 в LMU и многократный призер международных виртуальных марафонов WEC.
             </p>
-            <p class="lead">
+            <p class="lead" style="margin-bottom: 18px;">
               За плечами у Артема опыт работы с реальными гоночными инженерами и сотни часов персональных сессий с симрейсерами. Он не заставляет заучивать трассу наизусть, а учит чувствовать баланс машины, читать телеметрию в Motec i2 Pro и снимать секунды с круга осознанно.
             </p>
+
+            <ul class="mentor-achievements">
+              <li class="is-highlight">Топ-1 мирового рейтинга LMU</li>
+              <li>Чемпион зарубежного чемпионата VMS Contender Series</li>
+              <li>Победитель этапов LFM PRO SERIES</li>
+              <li>Чемпион SMP Esports Трофей РАФ на выносливость GT3 2024</li>
+            </ul>
           </div>
 
           <div class="mentor-visual">
-            <img src="assets/img/driver%201.webp" alt="Артем Маниша, ведущий эксперт STINT ACADEMY по LMGT3 в Le Mans Ultimate" class="mentor-photo" loading="lazy">
+            <div class="mentor-carousel" id="mentorCarousel" aria-roledescription="carousel" aria-label="Фотографии Артема Маниши">
+              <div class="mentor-carousel-viewport">
+                <div class="mentor-carousel-track">
+                  <div class="mentor-slide">
+                    <img src="assets/img/coach-01.webp" alt="Артём Маниша за рулём на LAN-турнире, STINT ACADEMY" loading="lazy">
+                  </div>
+                  <div class="mentor-slide">
+                    <img src="assets/img/coach-02.webp" alt="Награждение SMP Esports, Артём Маниша справа, STINT ACADEMY" loading="lazy">
+                    <span class="mentor-slide-caption">Награждение SMP Esports • Артём справа</span>
+                  </div>
+                  <div class="mentor-slide">
+                    <img src="assets/img/coach-03.webp" alt="Сцена SMP Racing, Артём Маниша справа, STINT ACADEMY" loading="lazy">
+                    <span class="mentor-slide-caption">Сцена SMP Racing • Артём справа</span>
+                  </div>
+                </div>
+
+                <button type="button" class="mentor-nav-btn is-prev" aria-label="Предыдущее фото">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                  </svg>
+                </button>
+                <button type="button" class="mentor-nav-btn is-next" aria-label="Следующее фото">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="mentor-dots" role="tablist" aria-label="Выбор фотографии">
+                <button type="button" class="mentor-dot is-active" data-slide="0" role="tab" aria-selected="true" aria-label="Фото 1"></button>
+                <button type="button" class="mentor-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Фото 2"></button>
+                <button type="button" class="mentor-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Фото 3"></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
